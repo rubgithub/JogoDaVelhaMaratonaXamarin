@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JogoDaVelhaMaratona.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="FontFamilyName" x:TypeArguments="x:String" 
+                        Android="GloriaHallelujah.ttf#GloriaHallelujah" 
+                        WinPhone="Assets/Fonts/GloriaHallelujah.ttf#Gloria Hallelujah"/>
+
+            <OnPlatform x:Key="PaddingPlataformas" x:TypeArguments="Thickness" 
+                                    Android="0,10,0,0"/>
+
+            <Style x:Key="FontHandWriteTitle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{DynamicResource FontFamilyName}" />
+                <Setter Property="Margin"     Value="{DynamicResource PaddingPlataformas}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+
+<!--<Label.Margin>
+    <OnPlatform x:TypeArguments="Thickness" 
+                                    Android="0,10,0,0"/>
+</Label.Margin>-->

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:JogoDaVelhaMaratona"
+			 x:Class="JogoDaVelhaMaratona.View.MainPage"
+			 Title="Jogo da Velha">
+	<ContentPage.Padding>
+		<OnPlatform x:TypeArguments="Thickness"
+				iOS="0, 20, 0, 0" />
+	</ContentPage.Padding>
+
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="folhajogo1.png" Aspect="Fill"/>
+        <!--<Image Source="tictactoe.png"  VerticalOptions="Center" HorizontalOptions="Center"/>-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout>
+                <Label Text="Jogo da Velha" TextColor="Black" FontSize="Large"  HorizontalOptions="Center"
+                       Style="{DynamicResource FontHandWriteTitle}">
+                    
+                </Label>
+                <!--<Button Text="Jogo da Velha" TextColor="Blue" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"/>-->
+            </StackLayout>
+            <StackLayout Grid.Row="3" Margin="60,0,40,0" HorizontalOptions="Center">
+                <Button Text="Login" TextColor="Blue" FontSize="Medium" BackgroundColor="Gray"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
+
+<!--
+<Label.Margin>
+    <OnPlatform x:TypeArguments="Thickness"  Android="0,10,0,0"/>
+</Label.Margin>
+<Label.FontFamily>
+    <OnPlatform x:TypeArguments="x:String">
+        <OnPlatform.Android>GloriaHallelujah.ttf#GloriaHallelujah</OnPlatform.Android>
+        <OnPlatform.WinPhone>Assets/Fonts/GloriaHallelujah.ttf#Gloria Hallelujah</OnPlatform.WinPhone>
+    </OnPlatform>
+</Label.FontFamily>
+-->
