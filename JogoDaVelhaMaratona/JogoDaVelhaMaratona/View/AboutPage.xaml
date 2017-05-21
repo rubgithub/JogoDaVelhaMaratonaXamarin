@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JogoDaVelhaMaratona.View.AboutPage">
+    
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="folhajogo2.png" Aspect="Fill" Grid.ColumnSpan="2"  Grid.RowSpan="2"/>
+        <StackLayout Grid.ColumnSpan="2">
+            <Label Text="SOBRE"  Style="{DynamicResource FontHandWriteTitle}" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <Button Grid.Column="1" Command="{Binding GoHomeCommand}" Style="{DynamicResource ButtonHome}"/>
+        
+        <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
+            <Label Text="Icones Projetado por:" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
+            <Label Text="Freepik (http://spoon.graphics/1JCzRu5)" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

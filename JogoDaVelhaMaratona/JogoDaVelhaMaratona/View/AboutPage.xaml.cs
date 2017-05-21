@@ -1,15 +1,16 @@
-﻿using JogoDaVelhaMaratona.ViewModel;
+﻿
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace JogoDaVelhaMaratona.View
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class AboutPage : ContentPage
     {
-        public MainPage()
+        public AboutPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = new MainViewModel();
         }
     }
 }

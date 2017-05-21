@@ -5,53 +5,59 @@
 			 x:Class="JogoDaVelhaMaratona.View.MainPage"
 			 Title="Jogo da Velha">
 
-    <Grid BackgroundColor="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Image Source="folhajogo1.png" Aspect="Fill"/>
-        <!--<Image Source="tictactoe.png"  VerticalOptions="Center" HorizontalOptions="Center"/>-->
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <StackLayout>
-                <Label Text="JOGO DA VELHA"  Style="{DynamicResource FontHandWriteTitle}"/>
-            </StackLayout>
-            <StackLayout Grid.Row="3" HorizontalOptions="End" VerticalOptions="End" Padding="0,0,10,20">
-                <Label Text="❔ SOBRE" Style="{DynamicResource FontHandWriteLabel}"/>
+	<Grid BackgroundColor="White">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Image Source="folhajogo1.png" Aspect="Fill"/>
+		<!--<Image Source="tictactoe.png"  VerticalOptions="Center" HorizontalOptions="Center"/>-->
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<StackLayout>
+				<Label Text="JOGO DA VELHA"  Style="{DynamicResource FontHandWriteTitle}"/>
+			</StackLayout>
+			<StackLayout Grid.Row="3" HorizontalOptions="End" VerticalOptions="End" Padding="0,0,10,20">
+                
+                <Button Text="? SOBRE" Style="{DynamicResource FontHandWriteButton}" 
+                        Command="{Binding ShowAboutPageCommand}"/>
 
+			</StackLayout>
+			<StackLayout Grid.Row="2" Margin="50,0,10,0" HorizontalOptions="Center">
+                
+                <Button Text="Entrar com Facebook" Style="{DynamicResource FontHandWriteButton}" 
+                        Command="{Binding ShowGamePageCommand}">
+					<Button.Image>
+						<OnPlatform x:TypeArguments="FileImageSource"                 
+									Android="facebooklogo.png"
+									WinPhone="facebooklogo.png"/>
+					</Button.Image>
+				</Button>
+                
             </StackLayout>
-            <StackLayout Grid.Row="2" Margin="50,0,20,0" HorizontalOptions="Center">
-                <Button Text="Entrar com Facebook" Style="{DynamicResource FontHandWriteButton}">
-                    <Button.Image>
-                        <OnPlatform x:TypeArguments="FileImageSource"                 
-                                    Android="facebooklogo.png"
-                                    WinPhone="facebooklogo.png"/>
-                    </Button.Image>
-                </Button>
-            </StackLayout>
-        </Grid>
-    </Grid>
+		</Grid>
+	</Grid>
 </ContentPage>
 
 <!--
+    ❔
 <Label.Margin>
-    <OnPlatform x:TypeArguments="Thickness"  Android="0,10,0,0"/>
+	<OnPlatform x:TypeArguments="Thickness"  Android="0,10,0,0"/>
 </Label.Margin>
 <Label.FontFamily>
-    <OnPlatform x:TypeArguments="x:String">
-        <OnPlatform.Android>GloriaHallelujah.ttf#GloriaHallelujah</OnPlatform.Android>
-        <OnPlatform.WinPhone>Assets/Fonts/GloriaHallelujah.ttf#Gloria Hallelujah</OnPlatform.WinPhone>
-    </OnPlatform>
+	<OnPlatform x:TypeArguments="x:String">
+		<OnPlatform.Android>GloriaHallelujah.ttf#GloriaHallelujah</OnPlatform.Android>
+		<OnPlatform.WinPhone>Assets/Fonts/GloriaHallelujah.ttf#Gloria Hallelujah</OnPlatform.WinPhone>
+	</OnPlatform>
 </Label.FontFamily>
 -->

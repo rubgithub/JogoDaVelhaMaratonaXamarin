@@ -24,14 +24,30 @@
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
 
     <item name="android:textAppearanceButton">@style/MyTextAppearance.Material.Button</item>
+
+    <item name="android:buttonStyle">@style/NoShadowButton</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
   </style>
-
+  
+  <!-- Desativa CAPS dos botões -->
   <style name="MyTextAppearance.Material.Button" parent="@android:style/TextAppearance.Material.Button">
     <item name="textAllCaps">false</item>
     <item name="android:textAllCaps">false</item>
   </style>
+
+  <style name="NoShadowButton" parent="android:style/Widget.Button">
+    <item name="android:stateListAnimator">@null</item>
+  </style>
 </resources>
+
+<!--
+<style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+  <item name="android:buttonStyle">@style/NoShadowButton</item>
+</style>
+<style name="NoShadowButton" parent="android:style/Widget.Button">
+  <item name="android:stateListAnimator">@null</item>
+</style>
+-->

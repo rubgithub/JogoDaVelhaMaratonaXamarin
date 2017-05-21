@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JogoDaVelhaMaratona.View.GamePage">
+
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="folhajogo2.png" Aspect="Fill"/>
+        <StackLayout>
+            <Label Text="GAME"  Style="{DynamicResource FontHandWriteTitle}"/>
+        </StackLayout>
+
+        <Button Command="{Binding GoHomeCommand}" Style="{DynamicResource ButtonHome}"/>
+
+    </Grid>
+    
+</ContentPage>

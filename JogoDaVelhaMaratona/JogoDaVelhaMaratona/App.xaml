@@ -11,18 +11,29 @@
             <OnPlatform x:Key="PaddingPlataformas" x:TypeArguments="Thickness" 
                                     Android="0,10,0,0"/>
 
+            <OnPlatform x:Key="FontHandWriteTitleSize" x:TypeArguments="x:Double" 
+                        Android="22"
+                        WinPhone="22"/>
+
+            <OnPlatform x:Key="ImageHome"  x:TypeArguments="FileImageSource"
+									Android="home.png"
+									WinPhone="home.png"/>
+
             <Style x:Key="FontHandWriteTitle" TargetType="Label">
                 <Setter Property="FontFamily"           Value="{DynamicResource FontFamilyName}" />
                 <Setter Property="Margin"               Value="{DynamicResource PaddingPlataformas}" />
                 <Setter Property="TextColor"            Value="Blue" />
-                <Setter Property="FontSize"             Value="Large" />
+                <Setter Property="FontSize"             Value="{DynamicResource FontHandWriteTitleSize}" />
                 <Setter Property="HorizontalOptions"    Value="Center" />
             </Style>
-            
+
+            <OnPlatform x:Key="FontSizeButtonPlataformas" x:TypeArguments="x:Double" 
+                        Android="18"
+                        WinPhone="18"/>
             <Style x:Key="FontHandWriteButton" TargetType="Button">
                 <Setter Property="FontFamily"       Value="{DynamicResource FontFamilyName}" />
                 <Setter Property="TextColor"        Value="Blue" />
-                <Setter Property="FontSize"         Value="Medium" />
+                <Setter Property="FontSize"         Value="{DynamicResource FontSizeButtonPlataformas}" />
                 <Setter Property="BackgroundColor"  Value="Transparent" />
                 <Setter Property="BorderColor"      Value="Transparent" />
             </Style>
@@ -32,10 +43,27 @@
                 <Setter Property="TextColor"        Value="Blue" />
                 <Setter Property="FontSize"         Value="Medium" />
             </Style>
+                        
+            <Style x:Key="ButtonHome" TargetType="Button">
+                <Setter Property="Margin"               Value="0,-5,0,0" />
+                <Setter Property="VerticalOptions"      Value="Start" />
+                <Setter Property="BackgroundColor"      Value="Transparent" />
+                <Setter Property="HorizontalOptions"    Value="End" />
+                <Setter Property="Image"                Value="{DynamicResource ImageHome}" />
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
 
 <!--
-    TextColor="Blue" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
-    -->
+    HorizontalOptions="End" 
+                VerticalOptions="Start" 
+                BackgroundColor="Transparent" 
+                Margin="0,-5,0,0">
+            <Button.Image>
+                <OnPlatform x:TypeArguments="FileImageSource"                 
+									Android="home.png"
+									WinPhone="home.png"/>
+            </Button.Image>
+-->
