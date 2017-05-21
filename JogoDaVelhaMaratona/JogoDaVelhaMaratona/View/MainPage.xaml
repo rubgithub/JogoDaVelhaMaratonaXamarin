@@ -4,10 +4,6 @@
 			 xmlns:local="clr-namespace:JogoDaVelhaMaratona"
 			 x:Class="JogoDaVelhaMaratona.View.MainPage"
 			 Title="Jogo da Velha">
-	<ContentPage.Padding>
-		<OnPlatform x:TypeArguments="Thickness"
-				iOS="0, 20, 0, 0" />
-	</ContentPage.Padding>
 
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
@@ -29,14 +25,20 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackLayout>
-                <Label Text="Jogo da Velha" TextColor="Black" FontSize="Large"  HorizontalOptions="Center"
-                       Style="{DynamicResource FontHandWriteTitle}">
-                    
-                </Label>
-                <!--<Button Text="Jogo da Velha" TextColor="Blue" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"/>-->
+                <Label Text="JOGO DA VELHA"  Style="{DynamicResource FontHandWriteTitle}"/>
             </StackLayout>
-            <StackLayout Grid.Row="3" Margin="60,0,40,0" HorizontalOptions="Center">
-                <Button Text="Login" TextColor="Blue" FontSize="Medium" BackgroundColor="Gray"/>
+            <StackLayout Grid.Row="3" HorizontalOptions="End" VerticalOptions="End" Padding="0,0,10,20">
+                <Label Text="❔ SOBRE" Style="{DynamicResource FontHandWriteLabel}"/>
+
+            </StackLayout>
+            <StackLayout Grid.Row="2" Margin="50,0,20,0" HorizontalOptions="Center">
+                <Button Text="Entrar com Facebook" Style="{DynamicResource FontHandWriteButton}">
+                    <Button.Image>
+                        <OnPlatform x:TypeArguments="FileImageSource"                 
+                                    Android="facebooklogo.png"
+                                    WinPhone="facebooklogo.png"/>
+                    </Button.Image>
+                </Button>
             </StackLayout>
         </Grid>
     </Grid>

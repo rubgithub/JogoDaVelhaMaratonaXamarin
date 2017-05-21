@@ -12,14 +12,30 @@
                                     Android="0,10,0,0"/>
 
             <Style x:Key="FontHandWriteTitle" TargetType="Label">
+                <Setter Property="FontFamily"           Value="{DynamicResource FontFamilyName}" />
+                <Setter Property="Margin"               Value="{DynamicResource PaddingPlataformas}" />
+                <Setter Property="TextColor"            Value="Blue" />
+                <Setter Property="FontSize"             Value="Large" />
+                <Setter Property="HorizontalOptions"    Value="Center" />
+            </Style>
+            
+            <Style x:Key="FontHandWriteButton" TargetType="Button">
+                <Setter Property="FontFamily"       Value="{DynamicResource FontFamilyName}" />
+                <Setter Property="TextColor"        Value="Blue" />
+                <Setter Property="FontSize"         Value="Medium" />
+                <Setter Property="BackgroundColor"  Value="Transparent" />
+                <Setter Property="BorderColor"      Value="Transparent" />
+            </Style>
+            
+            <Style x:Key="FontHandWriteLabel" TargetType="Label">
                 <Setter Property="FontFamily" Value="{DynamicResource FontFamilyName}" />
-                <Setter Property="Margin"     Value="{DynamicResource PaddingPlataformas}" />
+                <Setter Property="TextColor"        Value="Blue" />
+                <Setter Property="FontSize"         Value="Medium" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
 
-<!--<Label.Margin>
-    <OnPlatform x:TypeArguments="Thickness" 
-                                    Android="0,10,0,0"/>
-</Label.Margin>-->
+<!--
+    TextColor="Blue" FontSize="Medium" BackgroundColor="Transparent" BorderColor="Transparent"
+    -->

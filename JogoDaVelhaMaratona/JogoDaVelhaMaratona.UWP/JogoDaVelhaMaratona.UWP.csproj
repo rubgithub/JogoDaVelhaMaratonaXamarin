@@ -111,6 +111,7 @@
     <None Include="JogoDaVelhaMaratona.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="facebooklogo.png" />
     <Content Include="folhajogo1.png" />
     <Content Include="folhajogo2.png" />
     <Content Include="tictactoe.png" />
