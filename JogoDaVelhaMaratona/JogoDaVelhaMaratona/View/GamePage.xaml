@@ -5,18 +5,70 @@
 
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="folhajogo2.png" Aspect="Fill"/>
+        <Image Source="folhajogo2.png" Aspect="Fill" Grid.RowSpan="3"/>
+
         <StackLayout>
             <Label Text="GAME"  Style="{DynamicResource FontHandWriteTitle}"/>
         </StackLayout>
-
         <Button Command="{Binding GoHomeCommand}" Style="{DynamicResource ButtonHome}"/>
 
+        <Grid Grid.Row="1">
+            <Grid.Margin>
+                <OnPlatform  x:TypeArguments="Thickness" 
+                            Android="30,0,0,0"
+                            WinPhone="50,0,0,0"
+                           
+                            />
+            </Grid.Margin>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Source="tictactoe.png" Aspect="Fill" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+
+            <!-- Coluna 1 -->
+            <Label Text="X" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,0,0,0" />
+
+            <Label Text="X" Grid.Row="1" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,-5,0,0" />
+
+            <Label Text="X" Grid.Row="2" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,-10,0,0" />
+
+            <!-- Coluna 2 -->
+            <Label Text="O" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,0,0,0" />
+
+            <Label Text="O" Grid.Row="1" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-5,0,0" />
+
+            <Label Text="O" Grid.Row="2" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-10,0,0" />
+
+            <!-- Coluna 3 -->
+            <Label Text="O" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,0,30,0" />
+
+            <Label Text="O" Grid.Row="1" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,-5,30,0" />
+
+            <Label Text="O" Grid.Row="2" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,-10,30,0" />
+        </Grid>
     </Grid>
-    
 </ContentPage>

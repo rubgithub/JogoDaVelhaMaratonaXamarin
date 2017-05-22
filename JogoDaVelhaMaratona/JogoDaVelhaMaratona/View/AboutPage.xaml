@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JogoDaVelhaMaratona.View.AboutPage">
-    
+
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,7 +18,7 @@
         </StackLayout>
 
         <Button Grid.Column="1" Command="{Binding GoHomeCommand}" Style="{DynamicResource ButtonHome}"/>
-        
+
         <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
             <Label Text="Icones Projetado por:" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
             <Label Text="Freepik (http://spoon.graphics/1JCzRu5)" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>

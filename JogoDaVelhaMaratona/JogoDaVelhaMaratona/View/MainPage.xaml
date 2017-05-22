@@ -5,7 +5,7 @@
 			 x:Class="JogoDaVelhaMaratona.View.MainPage"
 			 Title="Jogo da Velha">
 
-	<Grid BackgroundColor="White">
+    <Grid BackgroundColor="White">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
