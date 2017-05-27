@@ -20,8 +20,11 @@
         <Button Grid.Column="1" Command="{Binding GoHomeCommand}" Style="{DynamicResource ButtonHome}"/>
 
         <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
-            <Label Text="Icones Projetado por:" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
-            <Label Text="Freepik (http://spoon.graphics/1JCzRu5)" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
+            <Label Text="Icones:" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center" TextColor="Black"/>
+            <Label Text="https://blog.spoongraphics.co.uk" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
+            <Label Text="Imagens:" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center" TextColor="Black"/>
+            <Label Text="http://www.freepik.com" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
+            <Label Text="https://pixabay.com" Style="{DynamicResource FontHandWriteLabel}" FontSize="Small" HorizontalOptions="Center"/>
         </StackLayout>
     </Grid>
 </ContentPage>

@@ -13,13 +13,33 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Image Source="folhajogo2.png" Aspect="Fill" Grid.RowSpan="3"/>
-
+        <Button Command="{Binding GoHomeCommand}" Style="{DynamicResource ButtonHome}"/>
         <StackLayout>
             <Label Text="GAME"  Style="{DynamicResource FontHandWriteTitle}"/>
         </StackLayout>
-        <Button Command="{Binding GoHomeCommand}" Style="{DynamicResource ButtonHome}"/>
 
-        <Grid Grid.Row="1">
+        <Grid x:Name="PlayersGrid" Grid.Row="0" Margin="0,20,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="1"  Padding="50,0,0,0" Orientation="Horizontal">
+                <Image Source="{Binding Player1Image, Mode=OneWay}"/>
+                <Label Text="{Binding Player1Name, Mode=OneWay}" TextColor="Red"  Style="{DynamicResource FontHandWriteLabel}" VerticalOptions="Center" FontSize="Default"/>
+            </StackLayout>
+            <StackLayout Grid.Row="2" Padding="0,0,45,0" Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                <Label Text="[ ] Player" TextColor="Blue" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default"/>
+                <Image Source="icon.png"/>
+            </StackLayout>
+        </Grid>
+        
+
+        <Grid x:Name="GameGrid" Grid.Row="1">
             <Grid.Margin>
                 <OnPlatform  x:TypeArguments="Thickness" 
                             Android="30,0,0,0"
@@ -69,6 +89,23 @@
 
             <Label Text="O" Grid.Row="2" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,-10,30,0" />
+        </Grid>
+        
+        
+        <Grid x:Name="GameStatusGrid" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="1" Padding="50,0,0,0" Orientation="Horizontal">
+                <Label Text="Game Status:" TextColor="Black" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default"/>
+            </StackLayout>
         </Grid>
     </Grid>
 </ContentPage>
