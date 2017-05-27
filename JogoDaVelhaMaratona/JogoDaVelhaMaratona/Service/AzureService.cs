@@ -14,7 +14,7 @@ namespace JogoDaVelhaMaratona.Service
     public class AzureService
     {
         List<AppServiceIdentity> identities = null;
-        static readonly string AppUrl = "";
+        static readonly string AppUrl = "https://rub-maratona-xamarin-intermediario.azurewebsites.net";
         public MobileServiceClient Client { get; set; } = null;
 
         public void Initialize()
@@ -56,7 +56,7 @@ namespace JogoDaVelhaMaratona.Service
 
                 var userToken = identities[0].AccessToken; 
 
-                var requestUrl = $"https://graph.facebook.com/v2.7/me/?fields=picture&access_token={userToken}";
+                var requestUrl = $"https://graph.facebook.com/v2.9/me/?fields=picture&access_token={userToken}";
 
                 var httpClient = new HttpClient();
 

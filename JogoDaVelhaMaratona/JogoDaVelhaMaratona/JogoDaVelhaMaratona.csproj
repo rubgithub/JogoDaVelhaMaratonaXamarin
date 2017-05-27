@@ -38,12 +38,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\GameManage.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Model\AppServiceIdentity.cs" />
     <Compile Include="Model\FacebookProfile.cs" />
     <Compile Include="Service\AzureService.cs" />
-    <Compile Include="Service\FacebookServices.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />

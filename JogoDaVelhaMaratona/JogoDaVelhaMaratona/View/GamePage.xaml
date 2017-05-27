@@ -61,33 +61,37 @@
             <Image Source="tictactoe.png" Aspect="Fill" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
 
             <!-- Coluna 1 -->
-            <Label Text="X" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,0,0,0" />
+            <Label Text="{Binding L1C1}" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,0,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PlayCommand}"  CommandParameter="1,1" />
+                </Label.GestureRecognizers>
+            </Label>
 
-            <Label Text="X" Grid.Row="1" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="{Binding L2C1}" Grid.Row="1" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,-5,0,0" />
 
-            <Label Text="X" Grid.Row="2" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="{Binding L3C1}" Grid.Row="2" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,-10,0,0" />
 
             <!-- Coluna 2 -->
-            <Label Text="O" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,0,0,0" />
 
-            <Label Text="O" Grid.Row="1" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="" Grid.Row="1" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-5,0,0" />
 
-            <Label Text="O" Grid.Row="2" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="" Grid.Row="2" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-10,0,0" />
 
             <!-- Coluna 3 -->
-            <Label Text="O" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,0,30,0" />
 
-            <Label Text="O" Grid.Row="1" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="" Grid.Row="1" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,-5,30,0" />
 
-            <Label Text="O" Grid.Row="2" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="" Grid.Row="2" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,-10,30,0" />
         </Grid>
         
