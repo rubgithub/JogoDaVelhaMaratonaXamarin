@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:JogoDaVelhaMaratona.Converter;assembly=JogoDaVelhaMaratona"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              x:Class="JogoDaVelhaMaratona.View.GamePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:GameColorConverter x:Key="PlayerColor"></local:GameColorConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
@@ -29,12 +37,40 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Row="1"  Padding="50,0,0,0" Orientation="Horizontal">
-                <Image Source="{Binding Player1Image, Mode=OneWay}"/>
+                <controls:CircleImage Source="{Binding Player1Image, Mode=OneWay}" Aspect="AspectFill">
+                    <controls:CircleImage.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double"
+                            iOS="55"
+                            Android="30"
+                            WinPhone="40"/>
+                    </controls:CircleImage.WidthRequest>
+                    <controls:CircleImage.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double"
+                            iOS="55"
+                            Android="30"
+                            WinPhone="40"/>
+                    </controls:CircleImage.HeightRequest>
+                </controls:CircleImage>
                 <Label Text="{Binding Player1Name, Mode=OneWay}" TextColor="Red"  Style="{DynamicResource FontHandWriteLabel}" VerticalOptions="Center" FontSize="Default"/>
             </StackLayout>
             <StackLayout Grid.Row="2" Padding="0,0,45,0" Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                <Label Text="[ ] Player" TextColor="Blue" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default"/>
-                <Image Source="icon.png"/>
+                <Label Text="Player" TextColor="Blue" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default"/>
+                <!--<Image Source="icon.png"/>-->
+                <controls:CircleImage Source="{Binding Player1Image, Mode=OneWay}" Aspect="AspectFill">
+                    <controls:CircleImage.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double"
+                            iOS="55"
+                            Android="30"
+                            WinPhone="40"/>
+                    </controls:CircleImage.WidthRequest>
+                    <controls:CircleImage.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double"
+                            iOS="55"
+                            Android="30"
+                            WinPhone="40"/>
+                    </controls:CircleImage.HeightRequest>
+                </controls:CircleImage>
+
             </StackLayout>
         </Grid>
         
@@ -60,22 +96,22 @@
             </Grid.ColumnDefinitions>
             <Image Source="tictactoe.png" Aspect="Fill" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
 
-            <!-- Coluna 1 -->
-            <Label Text="{Binding L0C0}" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+            <!-- Coluna 1-->
+            <Label x:Name="LabelL0C0" Text="{Binding L0C0}" TextColor="{Binding L0C0, Converter={StaticResource PlayerColor}}" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,0,0,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="0,0" />
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Text="{Binding L0C1}" Grid.Row="1" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="{Binding L0C1}" Grid.Row="1" TextColor="{Binding L0C1, Converter={StaticResource PlayerColor}}" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,-5,0,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="0,1" />
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Text="{Binding L0C2}" Grid.Row="2" TextColor="Red" BackgroundColor="Transparent"  FontSize="78"
+            <Label Text="{Binding L0C2}" Grid.Row="2" TextColor="{Binding L0C2, Converter={StaticResource PlayerColor}}" BackgroundColor="Transparent"  FontSize="78"
                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="30,-10,0,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="0,2" />
@@ -83,44 +119,59 @@
             </Label>
 
             <!-- Coluna 2 -->
-            <Label Text="{Binding L1C0}" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,0,0,0" >
+            <Label Text="{Binding L1C0}" Grid.Column="1" 
+                   TextColor="{Binding L1C0, Converter={StaticResource PlayerColor}}" BackgroundColor="Transparent"  
+                   FontSize="78"                       
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,0,0,0" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="1,0" />
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Text="{Binding L1C1}" Grid.Row="1" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-5,0,0" >
+            <Label Text="{Binding L1C1}" Grid.Row="1" Grid.Column="1" 
+                   TextColor="{Binding L1C1, Converter={StaticResource PlayerColor}}" BackgroundColor="Transparent"  
+                   FontSize="78"                       
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-5,0,0" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="1,1" />
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Text="{Binding L1C2}" Grid.Row="2" Grid.Column="1" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-10,0,0" >
+            <Label Text="{Binding L1C2}" Grid.Row="2" Grid.Column="1" 
+                   TextColor="{Binding L1C2, Converter={StaticResource PlayerColor}}" 
+                   BackgroundColor="Transparent"                     
+                   FontSize="78"                       
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-10,0,0" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="1,2" />
                 </Label.GestureRecognizers>
             </Label>
 
             <!-- Coluna 3 -->
-            <Label Text="{Binding L2C0}" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,0,30,0" >
+            <Label Text="{Binding L2C0}" Grid.Row="0" Grid.Column="2"  
+                   TextColor="{Binding L2C0, Converter={StaticResource PlayerColor}}"  
+                   BackgroundColor="Transparent"  
+                   FontSize="78"                       
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,0,30,0" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="2,0" />
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Text="{Binding L2C1}" Grid.Row="1" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,-5,30,0">
+            <Label Text="{Binding L2C1}" Grid.Row="1" Grid.Column="2" 
+                   TextColor="{Binding L2C1, Converter={StaticResource PlayerColor}}" 
+                   BackgroundColor="Transparent"  
+                   FontSize="78"                       
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-5,30,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="2,1" />
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Text="{Binding L2C2}" Grid.Row="2" Grid.Column="2" TextColor="Blue" BackgroundColor="Transparent"  FontSize="78"
-                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="-15,-10,30,0">
+            <Label Text="{Binding L2C2}" Grid.Row="2" Grid.Column="2" 
+                   TextColor="{Binding L2C2, Converter={StaticResource PlayerColor}}" 
+                   BackgroundColor="Transparent"  FontSize="78"                       
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,-10,30,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PlayerMoveCommand}"  CommandParameter="2,2" />
                 </Label.GestureRecognizers>

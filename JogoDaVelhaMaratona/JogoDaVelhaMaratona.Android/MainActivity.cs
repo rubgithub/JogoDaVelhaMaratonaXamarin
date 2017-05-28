@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace JogoDaVelhaMaratona.Droid
 {
@@ -18,6 +19,8 @@ namespace JogoDaVelhaMaratona.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+
+            ImageCircleRenderer.Init();
 
             LoadApplication(new App());
         }

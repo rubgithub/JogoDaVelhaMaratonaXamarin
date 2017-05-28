@@ -118,7 +118,7 @@ namespace JogoDaVelhaMaratona.ViewModel
             PlayerMoveCommand = new Command<string>((playerMove) => PlayerMoveExecute(playerMove));
             Player1Name = Settings.Player1Name;
             Player1Image = Settings.Player1Image;
-            _playerSimbol = GameManage.PlayerSymbolX;
+            _playerSimbol = GameManage.PlayerSymbolO;
 
             //GetFacebookUserInfoCommand = new Command(async () => await GetFacebookUserInfo());
         }
