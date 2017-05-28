@@ -21,9 +21,16 @@ namespace JogoDaVelhaMaratona.ViewModel
 
         private async void ShowGamePage(object obj)
         {
-            if(await LoginAsync())
+            try
             {
-                await PushAsync<GameViewModel>();
+                if (await LoginAsync())
+                {
+                    await PushAsync<GameViewModel>();
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
             }
         }
 
@@ -37,8 +44,19 @@ namespace JogoDaVelhaMaratona.ViewModel
             //_isBusy = true;
             //if (Settings.IsLoggedIn)
             //    return Task.FromResult(true);
+            try
+            {
+                return _azureService.LoginAsync();
+            }
+            catch (System.Exception)
+            {
 
-            return _azureService.LoginAsync();
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Application.Current.MainPage.DisplayAlert("Erro", "Não foi possível efetuar login, tente novamente.", "OK");
+                });
+                return Task.FromResult(false);
+            }
         }
     }
 }

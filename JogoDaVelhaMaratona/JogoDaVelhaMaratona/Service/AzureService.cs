@@ -21,13 +21,13 @@ namespace JogoDaVelhaMaratona.Service
         {
             Client = new MobileServiceClient(AppUrl);
 
-            //if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
-            //{
-            //    Client.CurrentUser = new MobileServiceUser(Settings.UserId)
-            //    {
-            //        MobileServiceAuthenticationToken = Settings.AuthToken
-            //    };
-            //}
+            if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
+            {
+                Client.CurrentUser = new MobileServiceUser(Settings.UserId)
+                {
+                    MobileServiceAuthenticationToken = Settings.AuthToken
+                };
+            }
         }
 
         public async Task<bool> LoginAsync()
