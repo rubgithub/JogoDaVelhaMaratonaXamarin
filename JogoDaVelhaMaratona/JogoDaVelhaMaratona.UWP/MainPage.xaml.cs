@@ -9,8 +9,8 @@ namespace JogoDaVelhaMaratona.UWP
         public MainPage()
         {
             this.InitializeComponent();
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(200, 100));
             ImageCircleRenderer.Init();
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(200, 100));
             LoadApplication(new JogoDaVelhaMaratona.App());
         }
     }

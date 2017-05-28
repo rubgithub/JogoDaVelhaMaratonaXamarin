@@ -190,7 +190,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="1" Padding="50,0,0,0" Orientation="Horizontal">
+            <StackLayout Grid.Row="1" Padding="60,0,0,0" Orientation="Horizontal">
                 <Label Text="Game Status:" TextColor="Black" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default"/>
             </StackLayout>
         </Grid>

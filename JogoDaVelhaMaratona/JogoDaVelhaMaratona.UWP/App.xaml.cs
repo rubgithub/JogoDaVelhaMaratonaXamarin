@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Messaging;
+using System;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Networking.PushNotifications;using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -27,16 +30,8 @@ namespace JogoDaVelhaMaratona.UWP
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
-//#if DEBUG
-//            if (System.Diagnostics.Debugger.IsAttached)
-//            {
-//                this.DebugSettings.EnableFrameRateCounter = true;
-//            }
-//#endif
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -57,6 +52,7 @@ namespace JogoDaVelhaMaratona.UWP
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+                await InitNotificationsAsync();
             }
 
             if (rootFrame.Content == null)
@@ -68,6 +64,7 @@ namespace JogoDaVelhaMaratona.UWP
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
         }
 
         /// <summary>
@@ -92,6 +89,59 @@ namespace JogoDaVelhaMaratona.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        //private async Task InitNotificationsAsync()
+        //{
+        //    var channel = await PushNotificationChannelManager
+        //        .CreatePushNotificationChannelForApplicationAsync();
+        //    const string templateBodyWNS =
+        //    "<toast><visual><binding template=\"ToastText01\"><textid =\"1\">$(messageParam)</text></binding></visual></toast>";
+
+        //    JObject headers = new JObject
+        //    {
+        //        ["X-WNS-Type"] = "wns/toast"
+        //    };
+
+        //    JObject templates = new JObject
+        //    {
+        //        ["genericMessage"] = new JObject
+        //        {
+        //            {"body", templateBodyWNS},
+        //            {"headers", headers} // Needed for WNS.
+        //        }
+        //    };
+
+        //    MobileServiceClient client = new MobileServiceClient("https://rub-maratona-xamarin-intermediario.azurewebsites.net/");
+        //    System.Diagnostics.Debug.Write(client.InstallationId);
+        //    await client.GetPush()
+        //        .RegisterAsync(channel.Uri, templates);
+        //}
+
+        private async Task InitNotificationsAsync()
+        {
+            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+            var hub = new NotificationHub("<<YOUR LISTEN CONNECTION STRING>>", "<<YOUR AZURE NOTIFICATION HUB NAME>>");
+            var result = await hub.RegisterNativeAsync(channel.Uri);
+            channel.PushNotificationReceived += Channel_PushNotificationReceived;
+
+            // Displays the registration ID so you know it was successful
+            if (result.RegistrationId != null)
+            {
+                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                dialog.Commands.Add(new UICommand("OK"));
+                await dialog.ShowAsync();
+            }
+        }
+
+        private void Channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
+        {
+            var raw = args.RawNotification;
+            System.Diagnostics.Debug.WriteLine(raw.Content);
+            //var ToastNotifier = ToastNotificationManager.CreateToastNotifier();
+            //ToastNotifier.Show(toast);
+            Xamarin.Forms.MessagingCenter.Send<object, string>(this, "ShowAlertMessage", raw.Content);
         }
     }
 }

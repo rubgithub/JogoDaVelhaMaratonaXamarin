@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp uap3">
-  <Identity Name="7d0cd82d-c910-4332-af4c-5b1abec1b466" Publisher="CN=hub" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="7d0cd82d-c910-4332-af4c-5b1abec1b466" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="55542FRSSoft.JogodaVelhaUWP" Publisher="CN=06EE8427-6D57-410E-A335-A42F4B61F7FC" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="15089800-9a38-4b79-8f87-e9ba51ccdcb8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>JogoDaVelhaMaratona.UWP</DisplayName>
-    <PublisherDisplayName>hub</PublisherDisplayName>
+    <DisplayName>Jogo da Velha UWP</DisplayName>
+    <PublisherDisplayName>FRSSoft</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="JogoDaVelhaMaratona.UWP.App">
-      <uap:VisualElements DisplayName="JogoDaVelhaMaratona.UWP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="JogoDaVelhaMaratona.UWP" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="Jogo da Velha UWP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="JogoDaVelhaMaratona.UWP" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
