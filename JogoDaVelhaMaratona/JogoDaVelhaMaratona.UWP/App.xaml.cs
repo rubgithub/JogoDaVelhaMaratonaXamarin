@@ -3,7 +3,9 @@ using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Networking.PushNotifications;using Windows.UI.Popups;
+using Windows.Data.Xml.Dom;
+using Windows.Networking.PushNotifications;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -123,25 +125,51 @@ namespace JogoDaVelhaMaratona.UWP
             var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
             var hub = new NotificationHub("<<YOUR LISTEN CONNECTION STRING>>", "<<YOUR AZURE NOTIFICATION HUB NAME>>");
+
+            //listen and send
             var result = await hub.RegisterNativeAsync(channel.Uri);
             channel.PushNotificationReceived += Channel_PushNotificationReceived;
 
             // Displays the registration ID so you know it was successful
             if (result.RegistrationId != null)
             {
-                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
-                dialog.Commands.Add(new UICommand("OK"));
-                await dialog.ShowAsync();
+                //var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                //dialog.Commands.Add(new UICommand("OK"));
+                //await dialog.ShowAsync();
+                var xmlToastTemplate = "<toast launch=\"app-defined-string\">" +
+                         "<visual>" +
+                           "<binding template =\"ToastGeneric\">" +
+                             "<text>Push Notification</text>" +
+                             "<text>" +
+                               "Registered: " + result.RegistrationId +
+                             "</text>" +
+                           "</binding>" +
+                         "</visual>" +
+                       "</toast>";
+
+                var xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(xmlToastTemplate);
+
+                var toast = new ToastNotification(xmlDocument);
+                var ToastNotifier = ToastNotificationManager.CreateToastNotifier();
+                ToastNotifier.Show(toast);
             }
         }
 
         private void Channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
         {
-            var raw = args.RawNotification;
-            System.Diagnostics.Debug.WriteLine(raw.Content);
-            //var ToastNotifier = ToastNotificationManager.CreateToastNotifier();
-            //ToastNotifier.Show(toast);
-            Xamarin.Forms.MessagingCenter.Send<object, string>(this, "ShowAlertMessage", raw.Content);
+            //var reg = new TemplateRegistration(channel.Uri, "RAW Template", "TemplateName", new List<string> { "tags" },
+            //    new Dictionary<string, string> { { "X-WNS-Type", "wns/raw" } });
+            //var result = await hub.RegisterAsync(reg);
+
+            if (args.NotificationType == PushNotificationType.Toast)
+            {
+                System.Diagnostics.Debug.WriteLine("");
+            }else
+            {
+                var raw = args.RawNotification;
+                Xamarin.Forms.MessagingCenter.Send<object, string>(this, "ShowAlertMessage", raw.Content);
+            }
         }
     }
 }
