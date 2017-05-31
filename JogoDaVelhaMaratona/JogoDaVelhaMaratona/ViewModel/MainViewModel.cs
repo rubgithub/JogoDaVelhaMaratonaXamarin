@@ -12,8 +12,27 @@ namespace JogoDaVelhaMaratona.ViewModel
         public Command ShowAboutPageCommand { get; }
         public Command ShowGamePageCommand { get; }
 
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set {
+                SetProperty(ref _isBusy , value);
+                IsLogginIn = !_isBusy;
+            }
+        }
+        
+        private bool _isLogginIn;
+        public bool IsLogginIn
+        {
+            get { return _isLogginIn; }
+            set { SetProperty(ref _isLogginIn , value); }
+        }
+
+
         public MainViewModel()
         {
+            IsBusy = false;
             ShowAboutPageCommand = new Command(ShowAboutPage);
             ShowGamePageCommand = new Command(ShowGamePage);
 
@@ -23,12 +42,17 @@ namespace JogoDaVelhaMaratona.ViewModel
 
         private async void ShowGamePage(object obj)
         {
+            IsBusy = true;
             try
             {
                 if (await LoginAsync())
                 {
+                    IsBusy = false;
                     await PushAsync<GameViewModel>();
                     await _pushNotification.Register();
+                }else
+                {
+                    IsBusy = false;
                 }
             }
             catch (System.Exception)
@@ -44,10 +68,6 @@ namespace JogoDaVelhaMaratona.ViewModel
 
         private Task<bool> LoginAsync()
         {
-            //_isBusy = true;
-            //if (Settings.IsLoggedIn)
-            //    return Task.FromResult(true);
-
             try
             {
                 return _azureService.LoginAsync();

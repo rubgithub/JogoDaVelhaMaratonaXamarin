@@ -28,14 +28,15 @@
 				<Label Text="JOGO DA VELHA"  Style="{DynamicResource FontHandWriteTitle}"/>
 			</StackLayout>
 			<StackLayout Grid.Row="3" HorizontalOptions="End" VerticalOptions="End" Padding="0,0,10,20">
-                
-                <Button Text="? SOBRE" Style="{DynamicResource FontHandWriteButton}" 
+
+                <Button Text="? SOBRE" IsEnabled="{Binding IsLogginIn}" Style="{DynamicResource FontHandWriteButton}" 
                         Command="{Binding ShowAboutPageCommand}"/>
 
 			</StackLayout>
 			<StackLayout Grid.Row="2" Margin="50,0,10,0" HorizontalOptions="Center">
-                
-                <Button Text="Entrar com Facebook" Style="{DynamicResource FontHandWriteButton}" 
+                <Label Text="Aguarde..." IsVisible="{Binding IsBusy}" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default" HorizontalOptions="Center"/>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  Color="Blue"/>
+                <Button Text="Entrar com Facebook" Style="{DynamicResource FontHandWriteButton}" IsEnabled="{Binding IsLogginIn}"
                         Command="{Binding ShowGamePageCommand}">
 					<Button.Image>
 						<OnPlatform x:TypeArguments="FileImageSource"                 
