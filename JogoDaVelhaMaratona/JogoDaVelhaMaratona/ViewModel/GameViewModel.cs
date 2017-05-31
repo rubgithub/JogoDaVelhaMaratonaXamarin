@@ -30,6 +30,15 @@ namespace JogoDaVelhaMaratona.ViewModel
             set { SetProperty (ref _player1Image , value); }
         }
 
+        private string _gameStatus;
+
+        public string GameStatus
+        {
+            get { return _gameStatus; }
+            set { SetProperty(ref _gameStatus, value); }
+        }
+
+
         #region Game Enters
         private string _l0C0;
         public string L0C0
@@ -119,9 +128,28 @@ namespace JogoDaVelhaMaratona.ViewModel
             Player1Name = Settings.Player1Name;
             Player1Image = Settings.Player1Image;
             _playerSimbol = GameManage.PlayerSymbolO;
+            GameStatus = "Registrando push notifications...";
 
-            //GetFacebookUserInfoCommand = new Command(async () => await GetFacebookUserInfo());
+            SubscribeMessagingCenter();
         }
+
+        private void SubscribeMessagingCenter()
+        {
+            MessagingCenter.Subscribe<object, string>(this, "GamePlayerMove", (sender, msg) =>
+            {
+                PlayerMoveExecute(msg);
+            });
+            MessagingCenter.Subscribe<object, string>(this, "GameStatus", (sender, msg) =>
+            {
+                GameStatus = msg; ;
+            });
+        }
+
+        //private async Task RegisterPush()
+        //{
+        //    var reg = new NotificationService();
+        //    var result = await reg.Register();
+        //}
 
         private void PlayerMoveExecute(string playerMove)
         {

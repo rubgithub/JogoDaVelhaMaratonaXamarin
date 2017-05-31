@@ -7,6 +7,7 @@ namespace JogoDaVelhaMaratona.ViewModel
     public class MainViewModel : BaseViewModel
     {
         private readonly AzureService _azureService;
+        private readonly NotificationService _pushNotification;
 
         public Command ShowAboutPageCommand { get; }
         public Command ShowGamePageCommand { get; }
@@ -17,6 +18,7 @@ namespace JogoDaVelhaMaratona.ViewModel
             ShowGamePageCommand = new Command(ShowGamePage);
 
             _azureService = DependencyService.Get<AzureService>();
+            _pushNotification = DependencyService.Get<NotificationService>();
         }
 
         private async void ShowGamePage(object obj)
@@ -26,6 +28,7 @@ namespace JogoDaVelhaMaratona.ViewModel
                 if (await LoginAsync())
                 {
                     await PushAsync<GameViewModel>();
+                    await _pushNotification.Register();
                 }
             }
             catch (System.Exception)
@@ -44,6 +47,7 @@ namespace JogoDaVelhaMaratona.ViewModel
             //_isBusy = true;
             //if (Settings.IsLoggedIn)
             //    return Task.FromResult(true);
+
             try
             {
                 return _azureService.LoginAsync();

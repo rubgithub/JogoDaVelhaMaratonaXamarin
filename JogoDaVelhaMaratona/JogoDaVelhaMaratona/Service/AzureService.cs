@@ -1,4 +1,5 @@
-﻿using JogoDaVelhaMaratona.Helpers;
+﻿using JogoDaVelhaMaratona.ConnectionsString;
+using JogoDaVelhaMaratona.Helpers;
 using JogoDaVelhaMaratona.Interfaces;
 using JogoDaVelhaMaratona.Model;
 using Microsoft.WindowsAzure.MobileServices;
@@ -14,12 +15,11 @@ namespace JogoDaVelhaMaratona.Service
     public class AzureService
     {
         List<AppServiceIdentity> identities = null;
-        static readonly string AppUrl = "https://rub-maratona-xamarin-intermediario.azurewebsites.net";
         public MobileServiceClient Client { get; set; } = null;
 
         public void Initialize()
         {
-            Client = new MobileServiceClient(AppUrl);
+            Client = new MobileServiceClient(AppConections.AzureUrl);
 
             if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
             {

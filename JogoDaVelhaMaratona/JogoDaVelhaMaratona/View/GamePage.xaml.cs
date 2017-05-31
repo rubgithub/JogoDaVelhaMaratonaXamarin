@@ -18,20 +18,12 @@ namespace JogoDaVelhaMaratona.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<object, string>(this, "ShowAlertMessage", (sender, msg) =>
-            {
-                //Device.BeginInvokeOnMainThread(() => {
-                //    DisplayAlert("Push message", msg, "OK");
-                //});
-                var resp = (GameViewModel)BindingContext;
-                resp.PlayerMoveCommand.Execute(msg);
-            });
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MessagingCenter.Unsubscribe<object>(this, "ShowAlertMessage");
+            MessagingCenter.Unsubscribe<object>(this, "GamePlayerMove");
         }
     }
 }
