@@ -1,8 +1,11 @@
 ﻿using JogoDaVelhaMaratona.Game;
 using JogoDaVelhaMaratona.Helpers;
+using JogoDaVelhaMaratona.Service;
 using System;
 using Xamarin.Forms;
-
+//TODO player pelo nome e posicionar nome e imagem 
+// Logica para cada jogador X ou O não permitir duas jogadas info: jogada: [1,1] aguardando jogador2
+// Push android
 namespace JogoDaVelhaMaratona.ViewModel
 {
     public class GameViewModel : BaseViewModel
@@ -121,6 +124,7 @@ namespace JogoDaVelhaMaratona.ViewModel
 
         #endregion
 
+        private readonly NotificationService _pushNotification;
         public GameViewModel()
         {
             GoHomeCommand = new Command(GoHome);
@@ -129,6 +133,9 @@ namespace JogoDaVelhaMaratona.ViewModel
             Player1Image = Settings.Player1Image;
             _playerSimbol = GameManage.PlayerSymbolO;
             GameStatus = "Registrando push notifications...";
+
+            _pushNotification = DependencyService.Get<NotificationService>();
+            _pushNotification.Register();
 
             SubscribeMessagingCenter();
         }
@@ -144,12 +151,6 @@ namespace JogoDaVelhaMaratona.ViewModel
                 GameStatus = msg; ;
             });
         }
-
-        //private async Task RegisterPush()
-        //{
-        //    var reg = new NotificationService();
-        //    var result = await reg.Register();
-        //}
 
         private void PlayerMoveExecute(string playerMove)
         {

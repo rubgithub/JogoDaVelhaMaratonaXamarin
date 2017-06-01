@@ -17,16 +17,42 @@ namespace JogoDaVelhaMaratona.UWP.Notification
             var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
             channel.PushNotificationReceived += Channel_PushNotificationReceived;
 
-            //listen and send
             var playerTag = new string[] { "user_player1" };
             var hub = new NotificationHub(AppConections.NotificationHubPath, AppConections.ConnectionStringPush);
 
-            //var result = await hub.RegisterNativeAsync(channel.Uri, playerTag);
+            TemplateRegistration reg;
+
+            try
+            {
+                reg = new TemplateRegistration(
+                channel.Uri,
+                "<toast>" +
+                    "<visual>" +
+                        "<binding template=\"ToastGeneric\">" +
+                            "<text id=\"1\">{'Player: ' + $(player_name)}</text>" +
+                            "<text id=\"2\">{'Jogada: ' + $(player_move)}</text>" +
+                        "</binding>" +
+                    "</visual>" +
+                "</toast>"
+                ,
+                "GameData",
+                playerTag
+                );
+                //new Dictionary<string, string> { { "X-WNS-Type", "wns/raw" } });
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+                throw;
+            }
+            
 
             var register = await RegisterPush();
+
             async Task<string> RegisterPush()
             {
-                var result = await hub.RegisterNativeAsync(channel.Uri, playerTag);
+                //var result = await hub.RegisterNativeAsync(channel.Uri, playerTag); sem template
+                var result = await hub.RegisterAsync(reg);
                 register = result.RegistrationId;
                 return register;
             }
@@ -39,15 +65,8 @@ namespace JogoDaVelhaMaratona.UWP.Notification
 
         private void Channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
         {
-            if (args.NotificationType == PushNotificationType.Toast)
-            {
-                System.Diagnostics.Debug.WriteLine("");
-            }
-            else
-            {
-                var raw = args.RawNotification;
-                Xamarin.Forms.MessagingCenter.Send<object, string>(this, "GamePlayerMove", raw.Content);
-            }
+            var playerMove = args.ToastNotification.Content.SelectSingleNode("/toast/visual/binding").SelectNodes("text")[1].InnerText;
+            Xamarin.Forms.MessagingCenter.Send<object, string>(this, "GamePlayerMove", playerMove.Substring(playerMove.Length - 3));
         }
     }
 }
