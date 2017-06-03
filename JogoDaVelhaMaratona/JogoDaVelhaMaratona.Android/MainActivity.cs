@@ -15,13 +15,13 @@ namespace JogoDaVelhaMaratona.Droid
         static MainActivity instance = null;
 
         // Return the current activity instance.
-        public static MainActivity CurrentActivity
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        //public static MainActivity CurrentActivity
+        //{
+        //    get
+        //    {
+        //        return instance;
+        //    }
+        //}
 
         protected override void OnCreate(Bundle bundle)
         {

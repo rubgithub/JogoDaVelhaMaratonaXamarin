@@ -1,5 +1,6 @@
 ﻿using JogoDaVelhaMaratona.Game;
 using JogoDaVelhaMaratona.Helpers;
+using JogoDaVelhaMaratona.Service;
 using System;
 using Xamarin.Forms;
 //TODO player pelo nome e posicionar nome e imagem 
@@ -123,7 +124,7 @@ namespace JogoDaVelhaMaratona.ViewModel
 
         #endregion
 
-        //private readonly NotificationService _pushNotification;
+        private readonly NotificationService _pushNotification;
         public GameViewModel()
         {
             GoHomeCommand = new Command(GoHome);
@@ -133,8 +134,8 @@ namespace JogoDaVelhaMaratona.ViewModel
             _playerSimbol = GameManage.PlayerSymbolO;
             GameStatus = "Registrando push notifications...";
 
-            //_pushNotification = DependencyService.Get<NotificationService>();
-            //_pushNotification.Register();
+            _pushNotification = DependencyService.Get<NotificationService>();
+            _pushNotification.Register();
 
             SubscribeMessagingCenter();
         }
