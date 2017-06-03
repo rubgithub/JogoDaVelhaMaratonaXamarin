@@ -1,18 +1,18 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Gcm.Client;
 using ImageCircle.Forms.Plugin.Droid;
 using Java.Lang;
-using JogoDaVelhaMaratona.ConnectionsString;
 
 namespace JogoDaVelhaMaratona.Droid
 {
-    [Activity(Label = "JogoDaVelhaMaratona", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    //
+    [Activity(LaunchMode = LaunchMode.SingleTop, Label = "JogoDaVelhaMaratona", Icon = "@drawable/iconapp", Theme = "@style/MainTheme", 
+        MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         // Create a new instance field for this activity.
-        static MainActivity instance = null;
+        //static MainActivity instance = null;
 
         // Return the current activity instance.
         //public static MainActivity CurrentActivity
@@ -25,7 +25,7 @@ namespace JogoDaVelhaMaratona.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
-            instance = this;
+            //instance = this;
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -42,6 +42,7 @@ namespace JogoDaVelhaMaratona.Droid
 
             try
             {
+                /*
                 // Check to ensure everything's set up right
                 GcmClient.CheckDevice(this);
                 GcmClient.CheckManifest(this);
@@ -49,6 +50,13 @@ namespace JogoDaVelhaMaratona.Droid
                 // Register for push notifications
                 System.Diagnostics.Debug.WriteLine("Registering...");
                 GcmClient.Register(this, AppConnections.Sender_Id);
+                */
+
+                // Initialize our Gcm Service Hub
+                Notification.NotificationService.Initialize(this);
+
+                // Register for GCM
+                Notification.NotificationService.Register(this);
             }
             catch (Java.Net.MalformedURLException)
             {

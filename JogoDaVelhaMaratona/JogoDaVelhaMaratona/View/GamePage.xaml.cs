@@ -24,6 +24,7 @@ namespace JogoDaVelhaMaratona.View
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<object>(this, "GamePlayerMove");
+            MessagingCenter.Unsubscribe<object>(this, "GameStatus");
         }
     }
 }

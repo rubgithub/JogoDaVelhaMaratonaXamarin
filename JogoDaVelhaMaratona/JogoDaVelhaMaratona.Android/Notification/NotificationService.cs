@@ -4,7 +4,10 @@ using Android.Media;
 using Android.Support.V4.App;
 using Gcm.Client;
 using JogoDaVelhaMaratona.ConnectionsString;
+using JogoDaVelhaMaratona.Interfaces;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Threading.Tasks;
 using WindowsAzure.Messaging;
 
 namespace JogoDaVelhaMaratona.Droid.Notification
@@ -26,7 +29,7 @@ namespace JogoDaVelhaMaratona.Droid.Notification
     }
 
     [Service] //Must use the service tag
-    public class NotificationService : GcmServiceBase
+    public class NotificationService : GcmServiceBase, INotificationService
     {
         static NotificationHub hub;
         //static MobileServiceClient client { get; set; }
@@ -60,13 +63,18 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             GcmClient.Register(Context, SampleGcmBroadcastReceiver.SENDER_IDS);
         }
 
+        public Task<string> RegisterNotificationAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public NotificationService() : base(SampleGcmBroadcastReceiver.SENDER_IDS)
 	    {
         }
 
         protected override void OnRegistered(Context context, string registrationId)
         {
-            Initialize(context);
+            //Initialize(context);
             //var client = Service.AzureService.Client;
             //Receive registration Id for sending GCM Push Notifications to
 
@@ -81,8 +89,8 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             */
 
             const string templateGCM = "{\"data\":" +
-                                            "{\"message\":\"$(player_name)\"," +
-                                            "\"args\":\"$(player_move)\"}" +
+                                            "{\"message\":\"{'Player: ' + $(player_name)}\"," +
+                                            "\"args\":\"{'Jogada: ' + $(player_move)}\"}" +
                                          "}";
 
             var templates = new JObject
@@ -116,24 +124,14 @@ namespace JogoDaVelhaMaratona.Droid.Notification
 
         protected override void OnMessage(Context context, Intent intent)
         {
-            System.Console.WriteLine("Received Notification");
+            //System.Console.WriteLine("Received Notification");
 
             if (intent != null || intent.Extras != null)
             {
                 var playerMove = intent.Extras.GetString("args");
                 var playerName = intent.Extras.GetString("message");
-                //if (!string.IsNullOrEmpty(message))
-                //{
-                //    CreateNotification("New todo item!", "Todo item: " + message);
-                //    return;
-                //}
-                //string msg2 = intent.Extras.GetString("msg");
-                //if (!string.IsNullOrEmpty(msg2))
-                //{
-                //    CreateNotification("New hub message!", msg2);
-                //    return;
-                //}
                 CreateNotification(playerName, playerMove);
+                Xamarin.Forms.MessagingCenter.Send<object, string>(this, "GamePlayerMove", playerMove.Substring(playerMove.Length - 3));
             }
         }
 
@@ -152,7 +150,9 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             //we use the pending intent, passing our ui intent over which will get called
             //when the notification is tapped.
             var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
-                    .SetSmallIcon(Android.Resource.Drawable.SymActionEmail)
+                    //.SetSmallIcon(Android.Resource.Drawable.SymDefAppIcon)
+                    .SetSmallIcon(Resource.Drawable.iconapp)
+                    //.SetLargeIcon(Resource.Drawable.iconapp)
                     .SetTicker(title)
                     .SetContentTitle(title)
                     .SetContentText(desc)
@@ -167,21 +167,6 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             notificationManager.Notify(1, notification);
         }
 
-        protected void dialogNotify(string title, string message)
-        {
-
-            //MainActivity.instance.RunOnUiThread(() => {
-            //    AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.instance);
-            //    AlertDialog alert = dlg.Create();
-            //    alert.SetTitle(title);
-            //    alert.SetButton("Ok", delegate {
-            //        alert.Dismiss();
-            //    });
-            //    alert.SetMessage(message);
-            //    alert.Show();
-            //});
-        }
-
         protected override bool OnRecoverableError(Context context, string errorId)
         {
             //Some recoverable error happened
@@ -192,6 +177,6 @@ namespace JogoDaVelhaMaratona.Droid.Notification
         {
             System.Console.WriteLine("Error");
             //Some more serious error happened
-        }
+        }        
     }
 }
