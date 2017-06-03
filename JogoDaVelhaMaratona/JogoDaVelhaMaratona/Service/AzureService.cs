@@ -15,11 +15,11 @@ namespace JogoDaVelhaMaratona.Service
     public class AzureService
     {
         List<AppServiceIdentity> identities = null;
-        public MobileServiceClient Client { get; set; } = null;
+        public static MobileServiceClient Client { get; set; } = null;
 
         public void Initialize()
         {
-            Client = new MobileServiceClient(AppConections.AzureUrl);
+            Client = new MobileServiceClient(AppConnections.AzureUrl);
 
             if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
             {
@@ -51,7 +51,6 @@ namespace JogoDaVelhaMaratona.Service
             else
             {
                 identities = await Client.InvokeApiAsync<List<AppServiceIdentity>>("/.auth/me");
-                var identities2 = await Client.InvokeApiAsync("/.auth/me");
                 var name = identities[0].UserClaims.Find(c => c.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")).Value; 
 
                 var userToken = identities[0].AccessToken; 

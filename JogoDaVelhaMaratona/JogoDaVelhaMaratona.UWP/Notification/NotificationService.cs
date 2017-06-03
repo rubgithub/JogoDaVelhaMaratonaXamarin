@@ -18,7 +18,7 @@ namespace JogoDaVelhaMaratona.UWP.Notification
             channel.PushNotificationReceived += Channel_PushNotificationReceived;
 
             var playerTag = new string[] { "user_player1" };
-            var hub = new NotificationHub(AppConections.NotificationHubPath, AppConections.ConnectionStringPush);
+            var hub = new NotificationHub(AppConnections.NotificationHubPath, AppConnections.PushUrlFullPath);
 
             TemplateRegistration reg;
 
@@ -52,9 +52,18 @@ namespace JogoDaVelhaMaratona.UWP.Notification
             async Task<string> RegisterPush()
             {
                 //var result = await hub.RegisterNativeAsync(channel.Uri, playerTag); sem template
-                var result = await hub.RegisterAsync(reg);
-                register = result.RegistrationId;
-                return register;
+                try
+                {
+                    var result = await hub.RegisterAsync(reg);
+                    register = result.RegistrationId;
+                    return register;
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.Write(e.Message);
+                    throw;
+                }
+
             }
 
             if (register == null)

@@ -38,7 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionsString\AppConections.cs" />
+    <Compile Include="ConnectionsString\AppConnections.cs" />
     <Compile Include="Converter\GameColorConverter.cs" />
     <Compile Include="Game\GameManage.cs" />
     <Compile Include="Helpers\Settings.cs" />

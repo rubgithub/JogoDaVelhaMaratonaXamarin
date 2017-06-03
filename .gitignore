@@ -260,3 +260,9 @@ paket-files/
 __pycache__/
 *.pyc
 /JogoDaVelhaMaratona/JogoDaVelhaMaratona/ConnectionsString/AppConections.cs
+/Components
+/Components
+/Components/GCMClient-1.0
+/Components/GCMClient-1.0.zip
+/Components/GCMClient-1.0.info
+/Components
