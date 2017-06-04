@@ -34,7 +34,7 @@
 
 			</StackLayout>
 			<StackLayout Grid.Row="2" Margin="50,0,10,0" HorizontalOptions="Center">
-                <Label Text="Aguarde..." IsVisible="{Binding IsBusy}" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default" HorizontalOptions="Center"/>
+                <Label Text="Aguarde..." IsVisible="{Binding IsBusy}" Style="{DynamicResource FontHandWriteLabel}" FontSize="Medium" HorizontalOptions="Center"/>
                 <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  Color="Blue"/>
                 <Button Text="Entrar com Facebook" Style="{DynamicResource FontHandWriteButton}" IsEnabled="{Binding IsLogginIn}"
                         Command="{Binding ShowGamePageCommand}">

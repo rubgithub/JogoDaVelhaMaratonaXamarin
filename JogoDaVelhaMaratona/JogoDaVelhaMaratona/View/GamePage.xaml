@@ -54,9 +54,8 @@
                 <Label Text="{Binding Player1Name, Mode=OneWay}" TextColor="Red"  Style="{DynamicResource FontHandWriteLabel}" VerticalOptions="Center" FontSize="Default"/>
             </StackLayout>
             <StackLayout Grid.Row="2" Padding="0,0,45,0" Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                <Label Text="Player" TextColor="Blue" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default"/>
-                <!--<Image Source="icon.png"/>-->
-                <controls:CircleImage Source="{Binding Player1Image, Mode=OneWay}" Aspect="AspectFill">
+                <Label Text="{Binding Player2Name, Mode=OneWay}" TextColor="Blue" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default"/>
+                <controls:CircleImage Source="{Binding Player2Image, Mode=OneWay}" Aspect="AspectFill">
                     <controls:CircleImage.WidthRequest>
                         <OnPlatform x:TypeArguments="x:Double"
                             iOS="55"
@@ -190,9 +189,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="1" Padding="60,0,0,0" Orientation="Horizontal">
-                <Label Text="Info: " TextColor="DarkOrange" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default" FontAttributes="Bold"/>
-                <Label Text="{Binding GameStatus}" TextColor="Black"  FontSize="Default" VerticalOptions="End"/>
+            <StackLayout Grid.Row="1" Padding="55,0,0,0" Orientation="Horizontal">
+                <Label Text="Info: " TextColor="Black" Style="{DynamicResource FontHandWriteLabel}" FontSize="Default" FontAttributes="Bold"/>
+                <Label Text="{Binding GameStatus}" TextColor="Firebrick"  FontSize="14" Margin="0,5,0,0"/>
             </StackLayout>
         </Grid>
     </Grid>

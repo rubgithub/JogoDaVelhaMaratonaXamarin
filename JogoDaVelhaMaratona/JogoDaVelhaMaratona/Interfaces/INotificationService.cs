@@ -4,6 +4,6 @@ namespace JogoDaVelhaMaratona.Interfaces
 {
     public interface INotificationService
     {
-        Task<string> RegisterNotificationAsync();
+        Task RegisterNotificationAsync();
     }
 }

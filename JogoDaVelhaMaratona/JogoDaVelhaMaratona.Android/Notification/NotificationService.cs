@@ -4,12 +4,14 @@ using Android.Media;
 using Android.Support.V4.App;
 using Gcm.Client;
 using JogoDaVelhaMaratona.ConnectionsString;
+using JogoDaVelhaMaratona.Droid.Notification;
 using JogoDaVelhaMaratona.Interfaces;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Threading.Tasks;
 using WindowsAzure.Messaging;
+using Xamarin.Forms;
 
+[assembly: Xamarin.Forms.Dependency(typeof(NotificationService))]
 namespace JogoDaVelhaMaratona.Droid.Notification
 {
     [BroadcastReceiver(Permission = Constants.PERMISSION_GCM_INTENTS)]
@@ -63,9 +65,17 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             GcmClient.Register(Context, SampleGcmBroadcastReceiver.SENDER_IDS);
         }
 
-        public Task<string> RegisterNotificationAsync()
+        public async Task RegisterNotificationAsync()
         {
-            throw new NotImplementedException();
+            MainActivity.CurrentActivity.RunOnUiThread
+                 (
+                     () => Initialize(MainActivity.CurrentActivity)
+                 );
+
+            MainActivity.CurrentActivity.RunOnUiThread
+               (
+                   () => Register(MainActivity.CurrentActivity)
+               ); 
         }
 
         public NotificationService() : base(SampleGcmBroadcastReceiver.SENDER_IDS)
@@ -74,19 +84,7 @@ namespace JogoDaVelhaMaratona.Droid.Notification
 
         protected override void OnRegistered(Context context, string registrationId)
         {
-            //Initialize(context);
-            //var client = Service.AzureService.Client;
             //Receive registration Id for sending GCM Push Notifications to
-
-            //const string templateGCM = "{\"data\":"+"{\"message\":\"$(messageParam)\"}}";
-
-            /*
-             const string templateGCM = "{\"data\":" +
-                                             "{\"message\":\"$(player_name)\"," +
-                                             "\"args\":\"$(player_move)\"," +
-                                             "\"myargs\":\"$(player_move3)\"}" +
-                                          "}";
-            */
 
             const string templateGCM = "{\"data\":" +
                                             "{\"message\":\"{'Player: ' + $(player_name)}\"," +
@@ -106,14 +104,25 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             try
             {
                 if (hub != null)
-                    hub.RegisterTemplate(registrationId, "TemplateGCM", templateGCM, playerTag);
+                {
+                    var register = hub.RegisterTemplate(registrationId, "TemplateGCM", templateGCM, playerTag);
                     //hub.Register(registrationId, "TEST2");
+                    if (register == null)
+                        SendStatusGame("Falha ao registrar push");
+                    else
+                        SendStatusGame($"PUSH OK, TAG: {playerTag[0]}");
+                }
             }
             catch (System.Exception e)
             {
                 System.Console.WriteLine(e.Message);
                 throw;
             }
+        }
+
+        private void SendStatusGame(string message)
+        {
+            MessagingCenter.Send<object, string>(this, "GameStatus", message);
         }
 
         protected override void OnUnRegistered(Context context, string registrationId)
@@ -125,13 +134,17 @@ namespace JogoDaVelhaMaratona.Droid.Notification
         protected override void OnMessage(Context context, Intent intent)
         {
             //System.Console.WriteLine("Received Notification");
-
+            //playerTag = new string[] { "user_player2" };
             if (intent != null || intent.Extras != null)
             {
-                var playerMove = intent.Extras.GetString("args");
-                var playerName = intent.Extras.GetString("message");
-                CreateNotification(playerName, playerMove);
-                Xamarin.Forms.MessagingCenter.Send<object, string>(this, "GamePlayerMove", playerMove.Substring(playerMove.Length - 3));
+                var playerMoveMessage = intent.Extras.GetString("args");
+                var playerNameMessage = intent.Extras.GetString("message");
+                CreateNotification(playerNameMessage, playerMoveMessage);
+
+                var playerMove = playerMoveMessage.Substring(playerMoveMessage.Length - 3);
+                var playerName = playerNameMessage.Replace("Player: ", string.Empty);
+
+                MessagingCenter.Send<object, string[]>(this, "GamePlayerMove", new[] {playerMove, playerName});
             }
         }
 

@@ -7,12 +7,12 @@ namespace JogoDaVelhaMaratona.Service
 {
     public class NotificationService
     {
-        public async Task<string> Register()
+        public async Task Register()
         {
             var auth = DependencyService.Get<INotificationService>();
-            var mensagemRegistro = await auth.RegisterNotificationAsync();
-            MessagingCenter.Send<object, string>(this, "GameStatus", mensagemRegistro);
-            return mensagemRegistro;
+            await auth.RegisterNotificationAsync();
+            //MessagingCenter.Send<object, string>(this, "GameStatus", mensagemRegistro);
+            //return mensagemRegistro;
         }
     }
 }

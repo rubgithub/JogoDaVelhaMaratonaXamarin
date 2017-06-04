@@ -63,11 +63,19 @@ namespace JogoDaVelhaMaratona.Service
 
                 var facebookProfile = JsonConvert.DeserializeObject<FacebookProfile>(userJson);
 
-                Settings.AuthToken = user.MobileServiceAuthenticationToken;
-                Settings.UserId = user.UserId;
+                //Settings.AuthToken = user.MobileServiceAuthenticationToken;
+                //Settings.UserId = user.UserId;
 
-                Settings.Player1Name = name;
-                Settings.Player1Image = facebookProfile.Picture.Data.Url;
+                if (name.Equals("Rub"))
+                {
+                    Settings.Player1Name = name;
+                    Settings.Player1Image = facebookProfile.Picture.Data.Url;
+                }
+                else
+                {
+                    Settings.Player2Name = name;
+                    Settings.Player2Image = facebookProfile.Picture.Data.Url;
+                }
 
             }
             return true;

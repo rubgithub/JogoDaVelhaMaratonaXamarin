@@ -8,8 +8,8 @@ namespace JogoDaVelhaMaratona
         public App()
         {
             InitializeComponent();
-            //MainPage = new NavigationPage(new MainPage());
-            MainPage = new NavigationPage(new GamePage());
+            MainPage = new NavigationPage(new MainPage());
+            //MainPage = new NavigationPage(new GamePage());
         }
 
         protected override void OnStart()

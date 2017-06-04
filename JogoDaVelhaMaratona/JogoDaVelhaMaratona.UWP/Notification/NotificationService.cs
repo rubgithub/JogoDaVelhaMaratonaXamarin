@@ -5,13 +5,14 @@ using Microsoft.WindowsAzure.Messaging;
 using System;
 using System.Threading.Tasks;
 using Windows.Networking.PushNotifications;
+using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.Dependency(typeof(NotificationService))]
 namespace JogoDaVelhaMaratona.UWP.Notification
 {
     public class NotificationService : INotificationService
     {
-        public async Task<string> RegisterNotificationAsync()
+        public async Task RegisterNotificationAsync()
         {
             //var hub = new NotificationHub("<<YOUR LISTEN CONNECTION STRING>>", "<<YOUR AZURE NOTIFICATION HUB NAME>>");
             var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
@@ -45,7 +46,7 @@ namespace JogoDaVelhaMaratona.UWP.Notification
                 System.Diagnostics.Debug.Write(e.Message);
                 throw;
             }
-            
+
 
             var register = await RegisterPush();
 
@@ -67,9 +68,14 @@ namespace JogoDaVelhaMaratona.UWP.Notification
             }
 
             if (register == null)
-                return "Falha ao registrar push";
+                SendStatusGame("Falha ao registrar push");
             else
-                return $"Push registrado! Tag: {playerTag[0]}";
+                SendStatusGame($"PUSH OK, TAG: {playerTag[0]}");
+        }
+
+        private void SendStatusGame(string message)
+        {
+            MessagingCenter.Send<object, string>(this, "GameStatus", message);
         }
 
         private void Channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)

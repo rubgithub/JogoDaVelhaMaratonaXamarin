@@ -1,6 +1,5 @@
 ﻿using JogoDaVelhaMaratona.Game;
 using JogoDaVelhaMaratona.Helpers;
-using JogoDaVelhaMaratona.Service;
 using System;
 using Xamarin.Forms;
 //TODO player pelo nome e posicionar nome e imagem 
@@ -18,6 +17,7 @@ namespace JogoDaVelhaMaratona.ViewModel
         public Command PlayerMoveCommand { get; }
         #endregion
 
+
         private string _player1Name;
         public string Player1Name
         {
@@ -31,6 +31,21 @@ namespace JogoDaVelhaMaratona.ViewModel
         {
             get { return _player1Image; }
             set { SetProperty (ref _player1Image , value); }
+        }
+
+        private string _player2Name;
+        public string Player2Name
+        {
+            get { return _player2Name; }
+            set { SetProperty(ref _player2Name, value); }
+        }
+
+        private string _player2Image;
+
+        public string Player2Image
+        {
+            get { return _player2Image; }
+            set { SetProperty(ref _player2Image, value); }
         }
 
         private string _gameStatus;
@@ -124,41 +139,65 @@ namespace JogoDaVelhaMaratona.ViewModel
 
         #endregion
 
-        private readonly NotificationService _pushNotification;
+        //private readonly NotificationService _pushNotification;
         public GameViewModel()
         {
             GoHomeCommand = new Command(GoHome);
             PlayerMoveCommand = new Command<string>((playerMove) => PlayerMoveExecute(playerMove));
             Player1Name = Settings.Player1Name;
             Player1Image = Settings.Player1Image;
-            _playerSimbol = GameManage.PlayerSymbolO;
+            Player2Name = Settings.Player2Name;
+            Player2Image = Settings.Player2Image;
+
+            if (!string.IsNullOrWhiteSpace(Player1Name))
+                _playerSimbol = GameManage.PlayerSymbolO;
+            else
+                _playerSimbol = GameManage.PlayerSymbolX;
+
             GameStatus = "Registrando push notifications...";
 
-            _pushNotification = DependencyService.Get<NotificationService>();
-            _pushNotification.Register();
+            //_pushNotification = DependencyService.Get<NotificationService>();
+            //_pushNotification.Register();
 
             SubscribeMessagingCenter();
         }
 
         private void SubscribeMessagingCenter()
         {
-            MessagingCenter.Subscribe<object, string>(this, "GamePlayerMove", (sender, msg) =>
+            MessagingCenter.Subscribe<object, string[]>(this, "GamePlayerMove", (sender, msg) =>
             {
-                PlayerMoveExecute(msg);
+                var playerMove = msg[0];
+                var playerName = msg[1];
+                PlayerMoveExecute(playerMove, playerName);
             });
             MessagingCenter.Subscribe<object, string>(this, "GameStatus", (sender, msg) =>
             {
-                GameStatus = msg; ;
+                SetGameStatus(msg);
             });
         }
 
-        private void PlayerMoveExecute(string playerMove)
+        private void SetGameStatus(string msg)
+        {
+            GameStatus = msg;
+        }
+
+        private void PlayerMoveExecute(string playerMove, string playerName = "")
         {
             var move = playerMove.Split(',');
 
+            var playerSymbol = _playerSimbol;
+            if (!string.IsNullOrWhiteSpace(playerName)) //jogada local
+            {
+                playerSymbol = _playerSimbol == GameManage.PlayerSymbolO ? GameManage.PlayerSymbolX : GameManage.PlayerSymbolO;
+            }else
+            {
+                playerName = "Sua: ";
+            }
+
             var lineMove = Int16.Parse(move[0]);
             var colMove = Int16.Parse(move[1]);
-            SetGameBoard(lineMove, colMove, _playerSimbol);
+            SetGameBoard(lineMove, colMove, playerSymbol);
+            SetGameStatus($"{playerName} Jogada: [{lineMove},{colMove}]");
         }
 
         private async void GoHome()
