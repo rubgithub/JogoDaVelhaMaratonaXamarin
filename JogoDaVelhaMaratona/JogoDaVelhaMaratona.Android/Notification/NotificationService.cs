@@ -38,7 +38,7 @@ namespace JogoDaVelhaMaratona.Droid.Notification
 
         //MobileServiceClient client = new MobileServiceClient("MOBILE_APP_URL");
 
-        public static void Initialize(Context context)
+        public static async Task<bool> Initialize(Context context)
         {
             // Call this from our main activity
             var cs = ConnectionString.CreateUsingSharedAccessKeyWithListenAccess(
@@ -51,6 +51,7 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             try
             {
                 hub = new NotificationHub(hubName, cs, context);
+                return await Task.Run(() => true); ;
             }
             catch (System.Exception e)
             {
@@ -59,23 +60,25 @@ namespace JogoDaVelhaMaratona.Droid.Notification
             }
         }
 
-        public static void Register(Context Context)
+        public static async Task<bool> Register(Context Context)
         {
             // Makes this easier to call from our Activity
             GcmClient.Register(Context, SampleGcmBroadcastReceiver.SENDER_IDS);
+            return await Task.Run(() => true);
         }
 
         public async Task RegisterNotificationAsync()
         {
             MainActivity.CurrentActivity.RunOnUiThread
                  (
-                     () => Initialize(MainActivity.CurrentActivity)
+                     async () => await Initialize(MainActivity.CurrentActivity)
                  );
 
-            MainActivity.CurrentActivity.RunOnUiThread
+             MainActivity.CurrentActivity.RunOnUiThread
                (
-                   () => Register(MainActivity.CurrentActivity)
-               ); 
+                   async () => await Register(MainActivity.CurrentActivity)
+               );
+            await Task.Run(() => true);
         }
 
         public NotificationService() : base(SampleGcmBroadcastReceiver.SENDER_IDS)

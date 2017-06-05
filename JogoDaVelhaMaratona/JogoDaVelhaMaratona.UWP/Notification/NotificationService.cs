@@ -80,8 +80,28 @@ namespace JogoDaVelhaMaratona.UWP.Notification
 
         private void Channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
         {
-            var playerMove = args.ToastNotification.Content.SelectSingleNode("/toast/visual/binding").SelectNodes("text")[1].InnerText;
-            Xamarin.Forms.MessagingCenter.Send<object, string>(this, "GamePlayerMove", playerMove.Substring(playerMove.Length - 3));
+            /*
+             
+                var playerMoveMessage = intent.Extras.GetString("args");
+                var playerNameMessage = intent.Extras.GetString("message");
+                CreateNotification(playerNameMessage, playerMoveMessage);
+
+                var playerMove = playerMoveMessage.Substring(playerMoveMessage.Length - 3);
+                var playerName = playerNameMessage.Replace("Player: ", string.Empty);
+
+                 MessagingCenter.Send<object, string[]>(this, "GamePlayerMove", new[] {playerMove, playerName});
+             */
+
+            var playerNameMessage = args.ToastNotification.Content.SelectSingleNode("/toast/visual/binding").SelectNodes("text")[0].InnerText;
+            var playerMoveMessage = args.ToastNotification.Content.SelectSingleNode("/toast/visual/binding").SelectNodes("text")[1].InnerText;
+
+            var playerMove = playerMoveMessage.Substring(playerMoveMessage.Length - 3);
+            var playerName = playerNameMessage.Replace("Player: ", string.Empty);
+
+            MessagingCenter.Send<object, string[]>(this, "GamePlayerMove", new[] { playerMove, playerName });
+
+            //var playerMove = args.ToastNotification.Content.SelectSingleNode("/toast/visual/binding").SelectNodes("text")[1].InnerText;
+            //MessagingCenter.Send<object, string>(this, "GamePlayerMove", playerMove.Substring(playerMove.Length - 3));
         }
     }
 }

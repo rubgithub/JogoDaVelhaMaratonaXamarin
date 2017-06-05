@@ -184,20 +184,22 @@ namespace JogoDaVelhaMaratona.ViewModel
         private void PlayerMoveExecute(string playerMove, string playerName = "")
         {
             var move = playerMove.Split(',');
-
+            string mensagemParaJogador = string.Empty;
             var playerSymbol = _playerSimbol;
             if (!string.IsNullOrWhiteSpace(playerName)) //jogada local
             {
                 playerSymbol = _playerSimbol == GameManage.PlayerSymbolO ? GameManage.PlayerSymbolX : GameManage.PlayerSymbolO;
-            }else
+                mensagemParaJogador = "sua vez.";
+            } else
             {
-                playerName = "Sua: ";
+                playerName = "Sua";
+                mensagemParaJogador = "aguarde sua vez.";
             }
 
             var lineMove = Int16.Parse(move[0]);
             var colMove = Int16.Parse(move[1]);
             SetGameBoard(lineMove, colMove, playerSymbol);
-            SetGameStatus($"{playerName} Jogada: [{lineMove},{colMove}]");
+            SetGameStatus($"{playerName} Jogada: [{lineMove},{colMove}], {mensagemParaJogador}");
         }
 
         private async void GoHome()
